@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f172a">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Job Photo Capture</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="app-bar">
+  <div class="app-bar__title">
+    <span class="app-bar__name" id="orgName">Job Photo Capture</span>
+    <span class="app-bar__sub" id="accountLine">Not connected</span>
+  </div>
+  <button type="button" class="btn btn--ghost btn--sm" id="authBtn">Connect</button>
+</header>
+
+<main class="wrap">
+
+  <!-- Config problems (missing client ID etc.) -->
+  <div class="banner banner--error hidden" id="configBanner" role="alert"></div>
+
+  <!-- ------------------------------------------------------------------ -->
+  <!-- Capture form                                                        -->
+  <!-- ------------------------------------------------------------------ -->
+  <section id="captureView">
+
+    <div class="card">
+      <label class="label" for="jobNumber">Job number</label>
+      <input
+        id="jobNumber"
+        class="input input--job"
+        type="text"
+        inputmode="text"
+        autocomplete="off"
+        autocapitalize="characters"
+        spellcheck="false"
+        enterkeyhint="done"
+        placeholder="e.g. 24-1087">
+      <p class="hint" id="jobHint">Photos are filed in a folder named after this number.</p>
+    </div>
+
+    <div class="card">
+      <div class="card__head">
+        <span class="label">Photos</span>
+        <span class="counter" id="photoCounter">0 of 4</span>
+      </div>
+
+      <div class="grid" id="photoGrid"></div>
+
+      <div class="row">
+        <button type="button" class="btn btn--primary btn--block" id="takeBtn">
+          <svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M4 7h3l1.5-2h7L17 7h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.6"/></svg>
+          Take photo
+        </button>
+        <button type="button" class="btn btn--quiet" id="pickBtn" title="Choose existing photos">Choose file</button>
+      </div>
+
+      <input type="file" id="cameraInput" accept="image/*" capture="environment" class="sr-only">
+      <input type="file" id="libraryInput" accept="image/*" multiple class="sr-only">
+    </div>
+
+    <div class="card">
+      <label class="label" for="notes">Notes <span class="label__opt">(optional)</span></label>
+      <textarea id="notes" class="input" rows="2" maxlength="500" placeholder="Anything worth recording with these photos"></textarea>
+    </div>
+
+    <button type="button" class="btn btn--go btn--block" id="submitBtn" disabled>Submit</button>
+    <p class="hint hint--center" id="submitHint"></p>
+  </section>
+
+  <!-- ------------------------------------------------------------------ -->
+  <!-- Upload progress                                                     -->
+  <!-- ------------------------------------------------------------------ -->
+  <section id="uploadView" class="hidden">
+    <div class="card">
+      <h2 class="h2">Uploading job <span id="uploadJob"></span></h2>
+      <ul class="steps" id="uploadSteps"></ul>
+    </div>
+    <button type="button" class="btn btn--block hidden" id="retryBtn">Retry failed uploads</button>
+    <button type="button" class="btn btn--quiet btn--block hidden" id="backBtn">Back to photos</button>
+  </section>
+
+  <!-- ------------------------------------------------------------------ -->
+  <!-- Done                                                                -->
+  <!-- ------------------------------------------------------------------ -->
+  <section id="doneView" class="hidden">
+    <div class="card card--done">
+      <div class="tick" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="m4 12.5 5.5 5.5L20 7"/></svg>
+      </div>
+      <h2 class="h2">Job <span id="doneJob"></span> submitted</h2>
+      <p class="muted" id="doneSummary"></p>
+      <a class="btn btn--block" id="doneLink" target="_blank" rel="noopener">Open folder in Drive</a>
+      <button type="button" class="btn btn--primary btn--block" id="nextBtn">Start next job</button>
+    </div>
+  </section>
+
+  <!-- ------------------------------------------------------------------ -->
+  <!-- Recent submissions (this device)                                    -->
+  <!-- ------------------------------------------------------------------ -->
+  <section class="card hidden" id="recentCard">
+    <div class="card__head">
+      <span class="label">Recent from this device</span>
+      <button type="button" class="linkbtn" id="clearRecent">Clear</button>
+    </div>
+    <ul class="recent" id="recentList"></ul>
+  </section>
+
+</main>
+
+<div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="config.js"></script>
+<script src="js/image.js"></script>
+<script src="js/drive.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
