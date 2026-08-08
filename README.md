@@ -1,246 +1,191 @@
-# Job Photo Capture
+# Business Finder
 
-An HTML5 web app for internal staff: enter a job number, take 3–4 photos, submit.
-Each photo is timestamped and filed into a Google Drive folder named after the job
-number, alongside a JSON record of the submission and (optionally) a row in a
-Google Sheet log.
+A local discovery platform that connects customers with the businesses around them — built with **React** (Vite) on the front end and **Node.js** (Express) on the back.
 
-No build step, no server-side code, no dependencies. It is a folder of static
-files — drop it on any web host and it runs.
+The idea it implements: existing map services list mostly well-known businesses and show little beyond a name and a star rating. Business Finder is built around three things they don't do — **living business profiles**, **plain-language search**, and a **live open/closed map**.
 
 ---
 
-## Why Google Drive and not iCloud
+## Quick start
 
-**iCloud is not available to a web app like this.** Apple's only web-facing API is
-CloudKit JS, which reads and writes a *developer's own* CloudKit container tied to
-an Apple Developer Program membership. There is no public API — CloudKit JS or
-otherwise — that lets a third-party web app write files into a staff member's
-iCloud Drive. Photos could only reach iCloud by syncing from a device's camera
-roll, which defeats the point of central filing.
-
-Google Drive has a documented REST API with browser OAuth, which is why the app
-targets it. The entire storage layer lives in [`js/drive.js`](js/drive.js) and is
-the only file that knows about Google — swapping in S3, SharePoint/OneDrive, or
-your own server means rewriting that one file against the same four functions
-(`ensureFolder`, `uploadFile`, `uploadJson`, `appendLogRow`).
-
-If iCloud filing is a hard requirement, the realistic route is a small backend
-that receives the uploads and a Mac (or Mac mini) signed into the iCloud account
-that mirrors them into iCloud Drive. That is a different project.
-
----
-
-## What a submission produces
-
-For job `24-1087`, inside your shared Drive folder:
-
-```
-24-1087/
-  JOB-24-1087__20260807-143210__p1of4.jpg
-  JOB-24-1087__20260807-143255__p2of4.jpg
-  JOB-24-1087__20260807-143318__p3of4.jpg
-  JOB-24-1087__20260807-143402__p4of4.jpg
-  JOB-24-1087__submission-20260807-143512.json
+```bash
+npm install
+npm run dev
 ```
 
-Each JPEG carries a banner burned into the bottom of the image:
+Then open **http://localhost:5173**.
 
-```
-JOB 24-1087                                          Photo 2
-2026-08-07 14:32:55 UTC+10
-```
+That's the whole setup. The API seeds itself with 30 businesses, ~50 live updates and two weeks of interaction history on first boot, so the app is never empty and needs no external database.
 
-The stamp is burned into the pixels deliberately. EXIF metadata is stripped by
-many viewers, by Drive's own preview, and by anything that screenshots or prints
-the photo — a visible banner survives all of that. The machine-readable copy is
-kept too, as Drive `appProperties` (`jobNumber`, `capturedAt`, `photoIndex`) so
-photos stay searchable.
-
-The `submission-*.json` file records job number, submitter, both UTC and local
-timestamps, per-photo dimensions and byte sizes, notes, and the Drive file IDs.
-Repeat submissions for the same job add files to the same folder rather than
-overwriting.
-
----
-
-## Setup
-
-### 1. Create the Drive folder
-
-Make one folder in Google Drive (or a Shared Drive) to hold all jobs — e.g.
-`Job Photos`. Share it with the staff who will use the app, with **Editor**
-access. Copy its ID from the URL:
-
-```
-https://drive.google.com/drive/folders/1AbCdEfGhIjKlMnOpQrStUvWxYz
-                                       └────────── this ──────────┘
-```
-
-A Shared Drive is preferable to a personal My Drive folder: files stay with the
-organisation when someone leaves. Note that with the setup below each file is
-*owned* by the staff member who uploaded it unless it lands in a Shared Drive.
-
-### 2. Create the Google Cloud OAuth client
-
-1. Go to <https://console.cloud.google.com/> and create a project (or pick one).
-2. **APIs & Services → Library** → enable **Google Drive API**. Also enable
-   **Google Sheets API** if you want the sheet log.
-3. **APIs & Services → OAuth consent screen** → choose **Internal** (available on
-   Google Workspace; this skips Google's app-verification review entirely, which
-   is the main reason to use a Workspace account here). Fill in the app name and
-   support email.
-4. **APIs & Services → Credentials → Create credentials → OAuth client ID**
-   → Application type **Web application**.
-5. Under **Authorised JavaScript origins**, add every origin the app is served
-   from — scheme and port included, no trailing slash:
-   - `https://photos.yourcompany.com` (production)
-   - `http://localhost:8080` (local testing)
-6. Copy the client ID.
-
-No redirect URI is needed — the app uses the token flow, not the code flow.
-
-### 3. Fill in `config.js`
-
-```js
-GOOGLE_CLIENT_ID:       '1234567890-abcdef.apps.googleusercontent.com',
-DRIVE_PARENT_FOLDER_ID: '1AbCdEfGhIjKlMnOpQrStUvWxYz',
-ORG_NAME:               'Acme Field Services',
-```
-
-`config.js` is the only file an administrator edits. Everything else — photo
-count, image size, job-number format — is also in there, commented.
-
-### 4. Optional: the Google Sheet log
-
-Create a spreadsheet, rename a tab to `Log`, and add a header row:
-
-| Submitted | Job number | Photos | Submitted by | Folder | Files | Notes |
-|---|---|---|---|---|---|---|
-
-Set `LOG_SHEET_ID` in `config.js` to the ID from the sheet's URL and share the
-sheet with staff as **Editor**. Each submission appends one row. Leave
-`LOG_SHEET_ID` blank to skip it — the per-job JSON record is always written
-either way.
-
-### 5. Deploy
-
-Copy the folder to any HTTPS static host — IIS, nginx, Apache, Netlify, Cloudflare
-Pages, an S3 bucket, a SharePoint site, whatever you already run.
-
-**HTTPS is mandatory.** Camera access, service workers and Google sign-in all
-refuse to run on plain HTTP. `http://localhost` is the one exception, for testing.
-
----
-
-## Local testing
-
-From this folder:
-
-```powershell
-python -m http.server 8080
-```
-
-or
-
-```powershell
-npx --yes serve -l 8080 .
-```
-
-Then open <http://localhost:8080/> and make sure `http://localhost:8080` is listed
-as an authorised JavaScript origin on the OAuth client.
-
-Desktop browsers open a file picker instead of a camera — that is expected. Use
-**Choose file** there and test the camera on a real phone against the deployed
-HTTPS URL.
-
----
-
-## Staff instructions
-
-1. Open the app URL on a phone. On iOS: Share → **Add to Home Screen**. On
-   Android: menu → **Install app**. It then launches full-screen like a native
-   app.
-2. Tap **Connect** once and sign in with the work Google account. The session
-   persists for about an hour and renews silently after that.
-3. Type the job number, take 3–4 photos, add notes if useful, tap **Submit**.
-4. Wait for the tick. If a photo fails — dead spot, dropped signal — tap
-   **Retry failed uploads**; photos that already went up are not re-sent.
-
----
-
-## Configuration reference
-
-All in `config.js`:
-
-| Setting | Default | Notes |
-|---|---|---|
-| `GOOGLE_CLIENT_ID` | — | Required. |
-| `DRIVE_PARENT_FOLDER_ID` | — | Blank files jobs at the root of each user's My Drive. |
-| `DRIVE_SCOPE` | full `drive` | See below. |
-| `LOG_SHEET_ID` / `LOG_SHEET_NAME` | — / `Log` | Optional sheet log. |
-| `MIN_PHOTOS` / `MAX_PHOTOS` | 3 / 4 | |
-| `MAX_IMAGE_EDGE` | 2000 px | Longest edge after downscaling. |
-| `JPEG_QUALITY` | 0.85 | |
-| `STAMP_LOCATION` | `false` | Burns GPS coordinates into the stamp. Prompts each user for location permission. |
-| `UPPERCASE_JOB_NUMBER` | `true` | |
-| `JOB_NUMBER_PATTERN` | alphanumeric, 2–32 chars | Regex, as a string. |
-
-### About the Drive scope
-
-The default is the full `https://www.googleapis.com/auth/drive` scope. This is
-required whenever `DRIVE_PARENT_FOLDER_ID` points at a folder the app did not
-create itself — which is the normal setup, where an admin shares one folder with
-everyone. Under the narrower `drive.file` scope, Google only exposes files the app
-created, so writing into a pre-existing shared folder fails with a 404.
-
-Switch `DRIVE_SCOPE` to `.../auth/drive.file` **only** if you also blank out
-`DRIVE_PARENT_FOLDER_ID`; each user then gets job folders in their own My Drive,
-and the app can see nothing else in their Drive. The app warns on screen if these
-two settings contradict each other.
-
-Getting narrow scope *and* a central folder requires either Google Picker (a
-one-time per-device folder selection) or a backend service account. Both are
-larger changes; ask if you want either.
-
----
-
-## Files
-
-| File | Purpose |
+| | |
 |---|---|
-| `index.html` | Markup and view structure. |
-| `styles.css` | All styling. Mobile-first, dark, large tap targets. |
-| `config.js` | **The only file to edit for deployment.** |
-| `js/image.js` | Decode, EXIF-correct rotation, downscale, burn the timestamp banner. |
-| `js/drive.js` | Google auth, Drive folders and uploads, Sheets logging. The whole storage layer. |
-| `js/app.js` | UI wiring, capture flow, submission orchestration. |
-| `sw.js` | Service worker — caches the app shell so it loads on a weak signal. |
-| `manifest.webmanifest`, `icon.svg` | Install-to-home-screen metadata. |
+| Web app | http://localhost:5173 |
+| API | http://localhost:4000 |
+| Requires | Node **22.5+** (uses the built-in `node:sqlite`) |
 
-Bump `CACHE` in `sw.js` when you deploy changes, otherwise phones that have
-already installed the app keep serving the old shell.
+### Demo accounts
+
+Password for both: `demo1234`
+
+| Account | Email | What it shows |
+|---|---|---|
+| Customer | `customer@demo.test` | Favourites, follow notifications |
+| Business owner | `owner@demo.test` | Dashboard for 4 businesses: post updates, view insights |
 
 ---
 
-## Deliberate limits
+## What's built
 
-Worth knowing before rollout:
+### For customers
 
-- **No offline queue.** The app shell loads offline, but a submission needs a live
-  connection. Photos survive a failed upload in the current tab and can be
-  retried, but closing the tab loses them. If staff routinely work out of signal,
-  an IndexedDB queue with background sync is the next thing to build.
-- **Access tokens live in memory only**, never `localStorage`, so closing the tab
-  ends the session — deliberate, since these are often shared devices. The cost is
-  a sign-in prompt roughly hourly; Google usually resolves it silently without any
-  user interaction.
-- **Files are owned by the uploading staff member** unless the parent folder is in
-  a Shared Drive. Use a Shared Drive if you need the organisation to retain
-  ownership.
-- **PWA icon is an SVG.** Android and desktop Chrome accept it. iOS home-screen
-  icons want PNG — export `icon.svg` to 180×180 and 512×512 PNGs and add them to
-  `manifest.webmanifest` plus an `apple-touch-icon` link if the iOS icon matters.
-- **The client ID is public**, as it is in every browser OAuth app. That is fine —
-  it is not a secret, and the authorised-origins list plus an *Internal* consent
-  screen is what actually restricts use.
+- **Natural-language search** — type "Where can I get vegan food that is open now?" or "a pharmacy that is open late". The app shows you how it understood the question above the results.
+- **Live open/closed map** — green pins are open right now, red are closed, and an orange ripple marks businesses that posted in the last few hours. Hovering a result pans the map to it.
+- **Living profiles** — each business page is a timeline of what's happening there today, not a static listing.
+- **Happening feed** — everything the city posted, filterable by category, plus a separate tab for the places you follow with unread badges.
+- **Favourites** — save a place, and its new posts appear in your feed.
+- **One-tap actions** — call, directions, save. Each is recorded so the owner can see what the listing drives.
+
+### For business owners
+
+- **Post an update** in about ten seconds, with a type (offer / new / event / just in / news), an optional expiry, and promotion for paid plans.
+- **Insights** — 14-day profile views with a trend against the previous week, plus directions, calls and follower counts.
+- **Per-post view counts**, so it's obvious which updates actually pull people in.
+
+### Design
+
+- Full light and dark themes driven by CSS custom properties, with a single source of truth per token.
+- Responsive down to phone width: the map/list split becomes a toggle, and a bottom tab bar replaces the top nav.
+- `prefers-reduced-motion` respected; buttons, chips and pills are all keyboard reachable with visible focus rings.
+- Photos degrade to a designed category glyph on a brand gradient when remote images are unavailable, so the UI still looks intentional offline.
+
+---
+
+## Natural-language search
+
+Search has two interpreters behind one interface:
+
+1. **Built-in** (default) — a phrase lexicon that maps plain English onto filters. No API key, no network, instant. It handles the intent categories the product depends on: open-now, late-night, price, quality, proximity, freshness, cuisine, diet and category.
+2. **Claude** (optional) — set `ANTHROPIC_API_KEY` and the same query goes to the Claude API with a JSON schema, catching phrasings the lexicon misses.
+
+The Claude path is a strict upgrade: any error, refusal or missing key falls back to the built-in interpreter, so **search never fails because of an AI outage**. The response tells the UI which one answered.
+
+```bash
+# optional
+setx ANTHROPIC_API_KEY "sk-ant-..."     # Windows
+export ANTHROPIC_API_KEY="sk-ant-..."   # macOS / Linux
+```
+
+---
+
+## How open/closed is decided
+
+Every business stores its own UTC offset, and hours are stored as minutes after local midnight. A closing time above 1440 means the shift runs past midnight — so a diner open 20:00–02:00 is stored as `1200 → 1560` and correctly reports "Open now" at 1am. The engine also reports *closing in 20 min* and *opens in 40 min*, which is what actually changes a customer's decision.
+
+See [`server/src/hours.js`](server/src/hours.js).
+
+---
+
+## Project layout
+
+```
+business-finder/
+├─ server/                    Express API + SQLite (node:sqlite, zero native deps)
+│  └─ src/
+│     ├─ index.js             All HTTP routes
+│     ├─ db.js                Schema + query helpers
+│     ├─ hours.js             Open/closed engine
+│     ├─ businesses.js        Shaping, distance, ranking
+│     ├─ search.js            Natural-language interpreters
+│     ├─ auth.js              scrypt passwords + HMAC session tokens
+│     ├─ seed.js              Seeder
+│     └─ seed-data.js         The demo dataset
+└─ web/                       React + Vite
+   └─ src/
+      ├─ store.jsx            User, favourites, location, theme, toasts
+      ├─ api.js               Typed API client
+      ├─ components/          Shell, SearchBar, BusinessCard, BusinessMap, ui
+      └─ pages/               Discover, BusinessPage, Feed, Favourites, OwnerDashboard
+```
+
+### Ranking
+
+Results blend five signals so the list reads like a good local guide rather than a database dump: proximity, whether it's open right now, how fresh its latest update is, its rating, and its subscription plan — the last being the revenue lever from the brief. See `score()` in [`server/src/businesses.js`](server/src/businesses.js).
+
+---
+
+## Commands
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | API + web together with live reload |
+| `npm run dev:server` | API only, on :4000 |
+| `npm run dev:web` | Web only, on :5173 (proxies `/api` to :4000) |
+| `npm run seed` | Wipe and re-seed the demo database |
+| `npm run build` | Production build of the web app into `web/dist` |
+| `npm start` | Run the API alone |
+
+## Configuration
+
+All optional — the defaults work.
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `PORT` | `4000` | API port |
+| `DB_FILE` | `server/data/business-finder.db` | SQLite file |
+| `AUTH_SECRET` | dev value | **Change in production** — signs session tokens |
+| `SEED_LAT` / `SEED_LNG` | Manama | Move the whole demo dataset to another city |
+| `SEED_CITY` | `Manama` | City name shown in the UI |
+| `SEED_TZ_OFFSET` | `180` | Minutes from UTC, used for open/closed |
+| `ANTHROPIC_API_KEY` | — | Enables Claude-powered search |
+| `ANTHROPIC_MODEL` | `claude-opus-5` | Model used for query interpretation |
+
+---
+
+## API reference
+
+**Public**
+
+```
+GET    /api/meta                          City, categories, counts, AI status
+GET    /api/businesses                    ?category&openNow&sort&lat&lng&limit
+GET    /api/search                        ?q=&lat=&lng=  → results + interpretation
+GET    /api/businesses/:idOrSlug          Full profile: hours, updates, reviews
+POST   /api/businesses/:id/interaction    { type: call | directions | update_view }
+GET    /api/updates                       ?category&limit — the city-wide feed
+```
+
+**Account**
+
+```
+POST   /api/auth/register                 { name, email, password, role }
+POST   /api/auth/login                    { email, password }
+GET    /api/auth/me
+GET    /api/favourites
+PUT    /api/favourites/:businessId
+DELETE /api/favourites/:businessId
+GET    /api/notifications                 Posts from places you follow
+POST   /api/notifications/seen
+```
+
+**Business owner** (requires an `owner` account)
+
+```
+GET    /api/owner/businesses
+GET    /api/owner/businesses/:id/insights
+GET    /api/owner/businesses/:id/updates
+POST   /api/owner/businesses/:id/updates          { body, kind, promoted, expiresInHours }
+DELETE /api/owner/businesses/:id/updates/:updateId
+PATCH  /api/owner/businesses/:id                  { tagline, description, phone, website, address }
+```
+
+---
+
+## Notes for production
+
+This is a complete, working product, but a few things are deliberately demo-grade:
+
+- **Sessions** are HMAC-signed tokens in `localStorage`. Move to httpOnly cookies with refresh rotation.
+- **SQLite** is ideal here (zero setup, no native build). At multi-city scale, move to Postgres with PostGIS so proximity filtering happens in the database rather than in memory.
+- **Photos** come from a placeholder service; real listings need uploads plus a CDN.
+- **Payments** for featured placement and promoted posts are modelled (`plan`, `promoted`) but not wired to a payment provider.
+- **Notifications** are in-app. Push notifications need a service worker and a push service.

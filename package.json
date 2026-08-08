@@ -1,0 +1,24 @@
+{
+  "name": "business-finder",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Business Finder — a local discovery platform connecting customers with the businesses around them.",
+  "workspaces": [
+    "server",
+    "web"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c magenta,cyan \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:server": "npm run dev --workspace server",
+    "dev:web": "npm run dev --workspace web",
+    "seed": "npm run seed --workspace server",
+    "build": "npm run build --workspace web",
+    "start": "npm run start --workspace server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}
