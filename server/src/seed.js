@@ -45,7 +45,7 @@ export function seed({ force = false } = {}) {
   const ownerId = run(
     'INSERT INTO users (email, name, password_hash, role) VALUES (?, ?, ?, ?)',
     'owner@demo.test',
-    'Amina Haddad',
+    'Jordan Lee',
     password,
     'owner',
   ).lastInsertRowid;

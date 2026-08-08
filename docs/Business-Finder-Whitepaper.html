@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Business Finder — Product Whitepaper</title>
+  <style>
+    @page {
+      size: Letter;
+      margin: 0.85in 0.9in 0.95in 0.9in;
+      @bottom-center {
+        content: "Business Finder  ·  Whitepaper  ·  " counter(page);
+        font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+        font-size: 9pt;
+        color: #6b7280;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.55;
+      color: #1f2937;
+      margin: 0;
+    }
+
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      color: #0f172a;
+      line-height: 1.25;
+      page-break-after: avoid;
+    }
+
+    h1 {
+      font-size: 26pt;
+      margin: 0 0 8pt;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 14.5pt;
+      margin: 22pt 0 8pt;
+      padding-bottom: 4pt;
+      border-bottom: 1.5pt solid #0f766e;
+    }
+
+    h3 {
+      font-size: 11.5pt;
+      margin: 14pt 0 6pt;
+      color: #134e4a;
+    }
+
+    p { margin: 0 0 9pt; }
+
+    .cover {
+      page-break-after: always;
+      padding-top: 1.4in;
+      min-height: 8.5in;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 9pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #0f766e;
+      margin-bottom: 14pt;
+    }
+
+    .subtitle {
+      font-size: 13pt;
+      color: #374151;
+      margin: 0 0 28pt;
+      max-width: 5.8in;
+    }
+
+    .meta-box {
+      border-left: 3pt solid #0f766e;
+      padding: 10pt 14pt;
+      background: #f0fdfa;
+      margin: 24pt 0 32pt;
+    }
+
+    .meta-box p { margin: 0 0 4pt; font-size: 10pt; }
+    .meta-box strong { color: #0f172a; }
+
+    .abstract {
+      font-size: 11pt;
+      color: #334155;
+      border: 1pt solid #d1d5db;
+      padding: 14pt 16pt;
+      background: #fafafa;
+    }
+
+    .abstract strong {
+      display: block;
+      font-size: 9pt;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0f766e;
+      margin-bottom: 6pt;
+    }
+
+    ul, ol { margin: 0 0 10pt; padding-left: 18pt; }
+    li { margin-bottom: 4pt; }
+
+    .callout {
+      background: #ecfdf5;
+      border: 1pt solid #99f6e4;
+      padding: 11pt 14pt;
+      margin: 12pt 0 14pt;
+    }
+
+    .callout p { margin: 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8pt 0 14pt;
+      font-size: 9.5pt;
+    }
+
+    th, td {
+      border: 1pt solid #d1d5db;
+      padding: 7pt 9pt;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #134e4a;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) td { background: #f8fafc; }
+
+    .two-col {
+      display: table;
+      width: 100%;
+      margin: 8pt 0 12pt;
+    }
+
+    .col {
+      display: table-cell;
+      width: 48%;
+      vertical-align: top;
+      padding: 10pt 12pt;
+      background: #f8fafc;
+      border: 1pt solid #e5e7eb;
+    }
+
+    .col + .col { padding-left: 12pt; margin-left: 4%; width: 48%; border-left: none; }
+    .col h3 { margin-top: 0; }
+
+    .pillars {
+      display: table;
+      width: 100%;
+      margin: 10pt 0 14pt;
+      border-spacing: 8pt 0;
+    }
+
+    .pillar {
+      display: table-cell;
+      width: 33%;
+      background: #0f766e;
+      color: #fff;
+      padding: 12pt;
+      vertical-align: top;
+    }
+
+    .pillar strong {
+      display: block;
+      font-size: 11pt;
+      margin-bottom: 6pt;
+    }
+
+    .pillar p {
+      margin: 0;
+      font-size: 9.2pt;
+      line-height: 1.45;
+      color: #ecfdf5;
+    }
+
+    .footer-note {
+      margin-top: 28pt;
+      padding-top: 10pt;
+      border-top: 1pt solid #e5e7eb;
+      font-size: 9pt;
+      color: #6b7280;
+    }
+
+    code {
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 9pt;
+      background: #f1f5f9;
+      padding: 1pt 4pt;
+    }
+
+    .toc ol { list-style: none; padding: 0; margin: 0; }
+    .toc li {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1pt dotted #cbd5e1;
+      padding: 5pt 0;
+      margin: 0;
+    }
+    .toc .n { color: #0f766e; font-weight: 700; margin-right: 8pt; }
+  </style>
+</head>
+<body>
+
+  <!-- COVER -->
+  <section class="cover">
+    <div class="eyebrow">Product Whitepaper</div>
+    <h1>Business Finder</h1>
+    <p class="subtitle">
+      A local discovery platform that helps people find what is open, nearby,
+      and actually happening — and helps local businesses stay visible beyond a
+      static name and star rating.
+    </p>
+
+    <div class="meta-box">
+      <p><strong>Product</strong> Business Finder (Exchange)</p>
+      <p><strong>Demo market</strong> Toronto, Canada</p>
+      <p><strong>Audience</strong> Customers · Local business owners · Product &amp; engineering stakeholders</p>
+      <p><strong>Version</strong> 1.0 · August 2026</p>
+      <p><strong>Live demo</strong> shope.hunnipages.com</p>
+    </div>
+
+    <div class="abstract">
+      <strong>In one sentence</strong>
+      Business Finder is a city-scale discovery app that combines natural-language
+      search, a live open/closed map, and living business profiles so customers can
+      decide in seconds — and owners can publish what is happening today without
+      needing a marketing team.
+    </div>
+  </section>
+
+  <!-- TOC -->
+  <h2>Contents</h2>
+  <div class="toc">
+    <ol>
+      <li><span><span class="n">01</span> The problem</span></li>
+      <li><span><span class="n">02</span> The product idea</span></li>
+      <li><span><span class="n">03</span> Who it is for</span></li>
+      <li><span><span class="n">04</span> What customers get</span></li>
+      <li><span><span class="n">05</span> What business owners get</span></li>
+      <li><span><span class="n">06</span> How search works</span></li>
+      <li><span><span class="n">07</span> How open / closed is decided</span></li>
+      <li><span><span class="n">08</span> How results are ranked</span></li>
+      <li><span><span class="n">09</span> Technology overview</span></li>
+      <li><span><span class="n">10</span> Demo guide</span></li>
+      <li><span><span class="n">11</span> Roadmap notes</span></li>
+    </ol>
+  </div>
+
+  <!-- 1 -->
+  <h2>1. The problem</h2>
+  <p>
+    Most map and review apps are excellent at answering “where is this place?”
+    They are weaker at answering the questions people actually ask day to day:
+  </p>
+  <ul>
+    <li>“Where can I get vegan food that is <em>open right now</em>?”</li>
+    <li>“Is there a pharmacy nearby that is open late?”</li>
+    <li>“What is happening around me today — not last year?”</li>
+  </ul>
+  <p>
+    Listings often freeze a business into a name, address, and star rating.
+    Fresh offers, stock arrivals, events, and short-notice hour changes rarely
+    surface. Owners who are not already famous struggle to stay visible.
+    Customers waste time calling, walking, or scrolling for information that
+    should be obvious.
+  </p>
+
+  <!-- 2 -->
+  <h2>2. The product idea</h2>
+  <p>
+    Business Finder is built around three capabilities that fill those gaps:
+  </p>
+
+  <div class="pillars">
+    <div class="pillar">
+      <strong>Living profiles</strong>
+      <p>Each business page is a timeline of what is happening today — offers, arrivals, events — not a static brochure.</p>
+    </div>
+    <div class="pillar">
+      <strong>Plain-language search</strong>
+      <p>People type the way they speak. The app turns that into filters and shows how it understood the question.</p>
+    </div>
+    <div class="pillar">
+      <strong>Live open / closed map</strong>
+      <p>Green means open now, red means closed, and recent posts ripple on the map so freshness is visible at a glance.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <p>
+      <strong>Design principle:</strong> help someone decide in under ten seconds —
+      go now, go later, or skip — using open status, distance, freshness, and
+      quality together, not rating alone.
+    </p>
+  </div>
+
+  <!-- 3 -->
+  <h2>3. Who it is for</h2>
+  <div class="two-col">
+    <div class="col">
+      <h3>Customers</h3>
+      <p>
+        Residents and visitors looking for food, errands, services, and
+        nightlife around them. They want honest open status, nearby options,
+        and a sense of what is new without reading long reviews first.
+      </p>
+    </div>
+    <div class="col">
+      <h3>Business owners</h3>
+      <p>
+        Local shops, cafés, clinics, gyms, and services that want a simple way
+        to post updates, see what drives calls and directions, and compete on
+        freshness — not only on ad spend.
+      </p>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <h2>4. What customers get</h2>
+  <h3>Natural-language search</h3>
+  <p>
+    Type questions such as “vegan food open now” or “a pharmacy that is open
+    late.” Results appear with a short explanation of how the query was
+    interpreted, so the product feels transparent rather than mysterious.
+  </p>
+
+  <h3>Map + list discovery</h3>
+  <p>
+    Browse by category or search, then scan a map that mirrors the list.
+    Hovering a result pans the map. Open businesses are easy to spot; places
+    that posted recently are highlighted so “what is alive right now” is
+    visible without opening every profile.
+  </p>
+
+  <h3>Living business pages</h3>
+  <p>
+    Each profile shows hours with “open now / closing soon / opens in …”, a
+    feed of updates, reviews, and one-tap Call, Directions, and Save actions.
+    Saves become favourites; followed places surface in a personal feed.
+  </p>
+
+  <h3>City happening feed</h3>
+  <p>
+    A city-wide stream of posts (filterable by category), plus a “Following”
+    tab with unread badges when signed in. The goal is local pulse, not a
+    social network.
+  </p>
+
+  <!-- 5 -->
+  <h2>5. What business owners get</h2>
+  <ul>
+    <li><strong>Fast updates</strong> — post an offer, arrival, event, or news item in roughly ten seconds, with optional expiry and promotion on paid plans.</li>
+    <li><strong>Insights</strong> — 14-day profile views with week-over-week trend, plus counts for directions, calls, and followers.</li>
+    <li><strong>Per-post views</strong> — see which updates actually attract attention.</li>
+    <li><strong>Plan signal</strong> — free / featured / premium placement is modelled so visibility can become a clear revenue lever later.</li>
+  </ul>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Demo account</th>
+        <th>Email</th>
+        <th>Password</th>
+        <th>What you see</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Customer</td>
+        <td><code>customer@demo.test</code></td>
+        <td><code>demo1234</code></td>
+        <td>Favourites and follow notifications</td>
+      </tr>
+      <tr>
+        <td>Business owner</td>
+        <td><code>owner@demo.test</code></td>
+        <td><code>demo1234</code></td>
+        <td>Dashboard for four businesses: post updates and view insights</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 6 -->
+  <h2>6. How search works</h2>
+  <p>
+    Search uses one interface and two interpreters. The product always tries
+    to answer; AI is an upgrade, not a dependency.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Interpreter</th>
+        <th>When it runs</th>
+        <th>Strength</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Built-in lexicon</strong> (default)</td>
+        <td>Always available — no API key, no network</td>
+        <td>Instant mapping of phrases to filters: open now, late night, price, quality, proximity, freshness, cuisine, diet, category</td>
+      </tr>
+      <tr>
+        <td><strong>Claude</strong> (optional)</td>
+        <td>When <code>ANTHROPIC_API_KEY</code> is set</td>
+        <td>Handles unusual phrasing via a JSON schema; any failure falls back to the built-in interpreter</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p>
+      <strong>Reliability rule:</strong> search never fails because of an AI outage.
+      The UI is told which interpreter answered, so demos stay honest.
+    </p>
+  </div>
+
+  <!-- 7 -->
+  <h2>7. How open / closed is decided</h2>
+  <p>
+    Hours are stored as minutes after local midnight for each business’s own
+    timezone offset. Closing times past midnight are allowed (for example,
+    20:00–02:00 becomes 1200 → 1560), so late-night venues report correctly
+    after midnight.
+  </p>
+  <p>
+    Beyond a binary open/closed flag, the engine surfaces decision-useful
+    detail: <em>closing in 20 min</em> or <em>opens in 40 min</em>. That is
+    often what changes a customer’s plan.
+  </p>
+  <p>
+    The Toronto demo uses Eastern Daylight Time (UTC−4) so status matches
+    local Canadian hours during the summer season.
+  </p>
+
+  <!-- 8 -->
+  <h2>8. How results are ranked</h2>
+  <p>
+    Results are scored like a good local guide, not a raw database dump.
+    Five signals are blended:
+  </p>
+  <ol>
+    <li><strong>Proximity</strong> — closer places rise when location is known.</li>
+    <li><strong>Open now</strong> — open businesses are preferred when that intent matters.</li>
+    <li><strong>Freshness</strong> — recent posts boost visibility.</li>
+    <li><strong>Rating</strong> — quality still counts, but not alone.</li>
+    <li><strong>Subscription plan</strong> — featured and premium placement is the modelled revenue lever.</li>
+  </ol>
+
+  <!-- 9 -->
+  <h2>9. Technology overview</h2>
+  <p>
+    The stack is intentionally small so the product can run with zero external
+    database setup and stay easy to demo or deploy.
+  </p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Layer</th>
+        <th>Choice</th>
+        <th>Why it fits</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Web app</td>
+        <td>React + Vite</td>
+        <td>Fast UI, map/list discovery, light &amp; dark themes, mobile tab bar</td>
+      </tr>
+      <tr>
+        <td>API</td>
+        <td>Node.js + Express</td>
+        <td>Simple REST surface for search, profiles, auth, owner tools</td>
+      </tr>
+      <tr>
+        <td>Data</td>
+        <td>Built-in SQLite (<code>node:sqlite</code>)</td>
+        <td>No native deps, seeds on first boot, ideal for demos and early markets</td>
+      </tr>
+      <tr>
+        <td>Auth</td>
+        <td>scrypt passwords + HMAC session tokens</td>
+        <td>Enough for demo accounts; production should move to httpOnly cookies</td>
+      </tr>
+      <tr>
+        <td>Maps</td>
+        <td>Leaflet / React-Leaflet</td>
+        <td>Open map tiles with open/closed pin styling</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Deployment shape (this environment)</h3>
+  <ul>
+    <li>Frontend and API run under <strong>PM2</strong>.</li>
+    <li><strong>Nginx</strong> serves the public host and proxies <code>/api</code> to the backend so the browser stays on one origin.</li>
+    <li>Demo city centre: <strong>Toronto</strong> (configurable via seed environment variables for any city).</li>
+  </ul>
+
+  <!-- 10 -->
+  <h2>10. Demo guide</h2>
+  <h3>Suggested five-minute walkthrough</h3>
+  <ol>
+    <li>Open Discover and read the city label — confirm Toronto.</li>
+    <li>Search: <em>“coffee open now”</em> or <em>“pharmacy open late”</em>. Notice the interpretation chip above results.</li>
+    <li>Toggle the map: green / red pins, ripple on recently posted places.</li>
+    <li>Open a business profile: hours status, update timeline, Call / Directions.</li>
+    <li>Visit Happening for the city feed; sign in as the customer to save favourites.</li>
+    <li>Sign in as the owner to post an update and open Insights.</li>
+  </ol>
+
+  <h3>What is pre-loaded</h3>
+  <p>
+    On first boot the API seeds about <strong>30 businesses</strong>, roughly
+    <strong>50 live updates</strong>, and two weeks of interaction history.
+    The demo is never empty and needs no manual database setup.
+  </p>
+
+  <!-- 11 -->
+  <h2>11. Roadmap notes</h2>
+  <p>
+    The current build is a complete, working product suitable for demos and
+    early pilots. A few areas are intentionally demo-grade and ready for a
+    production hardening pass:
+  </p>
+  <ul>
+    <li><strong>Sessions</strong> — move from localStorage tokens to httpOnly cookies with refresh rotation.</li>
+    <li><strong>Scale</strong> — SQLite is ideal early; multi-city scale benefits from Postgres + PostGIS for proximity queries.</li>
+    <li><strong>Media</strong> — photos currently use placeholders; real listings need uploads and a CDN.</li>
+    <li><strong>Payments</strong> — featured placement and promoted posts are modelled; a payment provider is the next commercial step.</li>
+    <li><strong>Push</strong> — notifications are in-app today; push needs a service worker and push service.</li>
+  </ul>
+
+  <div class="footer-note">
+    <p>
+      Business Finder Whitepaper · Version 1.0 · August 2026 · Demo market: Toronto, Canada<br />
+      This document describes the product as implemented in the Exchange / Business Finder codebase.
+    </p>
+  </div>
+
+</body>
+</html>

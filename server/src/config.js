@@ -14,12 +14,13 @@ export const config = {
   // The city the demo data is generated around. Any lat/lng works — the whole
   // app is geo-relative, so pointing this at another city just moves the map.
   seedCenter: {
-    lat: Number(process.env.SEED_LAT || 26.2285),
-    lng: Number(process.env.SEED_LNG || 50.586),
-    label: process.env.SEED_CITY || 'Manama',
+    lat: Number(process.env.SEED_LAT || 43.6532),
+    lng: Number(process.env.SEED_LNG || -79.3832),
+    label: process.env.SEED_CITY || 'Toronto',
     // Minutes offset from UTC, used to evaluate "is it open right now" in the
     // business's own local time rather than the server's.
-    tzOffsetMinutes: Number(process.env.SEED_TZ_OFFSET ?? 180),
+    // Eastern Time: -300 (EST) / -240 (EDT). Default assumes daylight time.
+    tzOffsetMinutes: Number(process.env.SEED_TZ_OFFSET ?? -240),
   },
 
   // Optional: set ANTHROPIC_API_KEY to upgrade natural-language search from the

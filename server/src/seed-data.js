@@ -123,7 +123,7 @@ export const BUSINESSES = [
     description:
       'A family-run Chinese kitchen that has been feeding the neighbourhood for eleven years. Noodles are pulled to order, the chilli oil is made in-house every Monday, and the lunch set is still the best value on the street.',
     address: '14 Harbour Lane',
-    phone: '+973 1720 4411',
+    phone: '+1 416 720 4411',
     website: 'https://goldenwok.example',
     d: [0.004, -0.006],
     price: 2,
@@ -139,7 +139,7 @@ export const BUSINESSES = [
       [4300, 'news', 'Our chilli oil is back in stock — small batch, made this morning.'],
     ],
     reviews: [
-      ['Layla H.', 5, 'The dan dan noodles are genuinely the best I have had outside Chengdu.'],
+      ['Liam H.', 5, 'The dan dan noodles are genuinely the best I have had outside Chengdu.'],
       ['Marcus T.', 4, 'Busy at peak times but the food comes out fast and hot.'],
     ],
   },
@@ -151,7 +151,7 @@ export const BUSINESSES = [
     description:
       'A tiny corner bakery with a big oven. Sourdough starts at six, croissants at seven, and the cinnamon rolls come out in batches until they run out — which they always do.',
     address: '3 Mill Street',
-    phone: '+973 1733 8090',
+    phone: '+1 416 733 8090',
     d: [-0.003, 0.005],
     price: 1,
     rating: 4.8,
@@ -178,7 +178,7 @@ export const BUSINESSES = [
     description:
       'Speciality coffee bar with a rotating single-origin filter, oat milk as standard, and enough plug sockets that nobody fights over them.',
     address: '77 Pearl Avenue',
-    phone: '+973 1766 1200',
+    phone: '+1 416 766 1200',
     d: [0.008, 0.009],
     price: 2,
     rating: 4.7,
@@ -193,7 +193,7 @@ export const BUSINESSES = [
       [3000, 'news', 'New rule — laptops welcome all day except Saturday brunch.'],
     ],
     reviews: [
-      ['Nour A.', 5, 'Best flat white in the city and the staff actually remember your order.'],
+      ['Nora A.', 5, 'Best flat white in the city and the staff actually remember your order.'],
       ['James K.', 4, 'Fills up fast at weekends but the coffee is worth the wait.'],
     ],
   },
@@ -205,7 +205,7 @@ export const BUSINESSES = [
     description:
       'A fully vegan kitchen doing bowls, mezze and a very good mushroom shawarma. Everything is made fresh daily and nothing on the menu contains animal products.',
     address: '22 Garden Row',
-    phone: '+973 1744 3355',
+    phone: '+1 416 744 3355',
     d: [-0.009, 0.002],
     price: 2,
     rating: 4.5,
@@ -230,7 +230,7 @@ export const BUSINESSES = [
     description:
       'A full-service pharmacy that genuinely never closes. Prescriptions, urgent supplies, baby formula at 3am, and a pharmacist on duty around the clock.',
     address: '1 Central Square',
-    phone: '+973 1711 0000',
+    phone: '+1 416 711 0000',
     d: [0.001, 0.001],
     price: 2,
     rating: 4.4,
@@ -255,7 +255,7 @@ export const BUSINESSES = [
     description:
       'Burgers, breakfast and bottomless coffee served until the small hours. The griddle stays on until 2am on weekdays and 3am at weekends.',
     address: '40 Station Road',
-    phone: '+973 1755 7788',
+    phone: '+1 416 755 7788',
     d: [0.012, -0.011],
     price: 1,
     rating: 4.3,
@@ -280,7 +280,7 @@ export const BUSINESSES = [
     description:
       'An intimate room with a proper piano, a short cocktail list and no cover charge before eight. Jazz on weekends, open mic on Tuesdays.',
     address: '9 Riverside Walk',
-    phone: '+973 1799 2020',
+    phone: '+1 416 799 2020',
     d: [0.006, 0.014],
     price: 3,
     rating: 4.6,
@@ -304,7 +304,7 @@ export const BUSINESSES = [
     description:
       'An independent grocer working direct with local farms. Deliveries land before six every morning, so what you see on the shelf is what came off the truck today.',
     address: '58 Orchard Street',
-    phone: '+973 1722 6161',
+    phone: '+1 416 722 6161',
     d: [-0.006, -0.008],
     price: 2,
     rating: 4.5,
@@ -330,7 +330,7 @@ export const BUSINESSES = [
     description:
       'An independent electronics shop with same-day screen repairs, genuine parts and staff who will happily tell you that you do not need the upgrade.',
     address: '12 Tech Plaza',
-    phone: '+973 1788 4242',
+    phone: '+1 416 788 4242',
     d: [0.015, 0.004],
     price: 3,
     rating: 4.2,
@@ -354,7 +354,7 @@ export const BUSINESSES = [
     description:
       'A small boutique stocking a tight selection of labels you will not find in the mall, plus alterations by an in-house tailor.',
     address: '31 Linen Lane',
-    phone: '+973 1777 5150',
+    phone: '+1 416 777 5150',
     d: [-0.012, 0.012],
     price: 3,
     rating: 4.4,
@@ -378,7 +378,7 @@ export const BUSINESSES = [
     description:
       'Traditional barbering with hot towels and a straight razor, plus modern fades. Walk-ins welcome; the queue is shown live on our page.',
     address: '5 Anchor Street',
-    phone: '+973 1766 9090',
+    phone: '+1 416 766 9090',
     d: [0.003, -0.013],
     price: 2,
     rating: 4.7,
@@ -391,7 +391,7 @@ export const BUSINESSES = [
       [2400, 'offer', 'Father and son cut: both for the price of one and a half, Sundays.'],
     ],
     reviews: [
-      ['Ahmed Z.', 5, 'Best fade in the city, and they never rush.'],
+      ['Alex Z.', 5, 'Best fade in the city, and they never rush.'],
     ],
   },
   {
@@ -402,7 +402,7 @@ export const BUSINESSES = [
     description:
       'A serious, unfussy gym: free weights, platforms, chalk allowed. Classes morning and evening, and a sauna that actually gets hot.',
     address: '88 Foundry Road',
-    phone: '+973 1733 2020',
+    phone: '+1 416 733 2020',
     d: [-0.015, -0.003],
     price: 2,
     rating: 4.5,
@@ -426,7 +426,7 @@ export const BUSINESSES = [
     description:
       'Twelve rotating flavours churned in the back, including three dairy-free. Cones, tubs and a very generous kids scoop.',
     address: '17 Seafront Promenade',
-    phone: '+973 1744 8181',
+    phone: '+1 416 744 8181',
     d: [0.01, 0.017],
     price: 1,
     rating: 4.8,
@@ -451,7 +451,7 @@ export const BUSINESSES = [
     description:
       'Independent bookshop with hand-written staff picks, a strong translated fiction section and a reading corner nobody will move you from.',
     address: '64 Quiet Lane',
-    phone: '+973 1755 3131',
+    phone: '+1 416 755 3131',
     d: [-0.004, 0.016],
     price: 2,
     rating: 4.9,
@@ -475,7 +475,7 @@ export const BUSINESSES = [
     description:
       'Indoor soft play, climbing frames and a craft room, split by age group so the toddlers are not trampled. Parents get decent coffee.',
     address: '2 Meadow Way',
-    phone: '+973 1799 4040',
+    phone: '+1 416 799 4040',
     d: [0.018, -0.004],
     price: 2,
     rating: 4.4,
@@ -499,7 +499,7 @@ export const BUSINESSES = [
     description:
       'A florist working with seasonal stems and no dyed carnations. Same-day delivery across the city if you order before two.',
     address: '26 Bloom Street',
-    phone: '+973 1722 7373',
+    phone: '+1 416 722 7373',
     d: [-0.008, -0.014],
     price: 2,
     rating: 4.6,
@@ -522,7 +522,7 @@ export const BUSINESSES = [
     description:
       'General practice with walk-in slots each morning, on-site lab tests, and a paediatric nurse five days a week.',
     address: '19 Marine Drive',
-    phone: '+973 1711 5252',
+    phone: '+1 416 711 5252',
     d: [0.005, 0.02],
     price: 3,
     rating: 4.3,
@@ -535,7 +535,7 @@ export const BUSINESSES = [
       [1000, 'news', 'Six same-day slots are open tomorrow morning. Call to book.'],
     ],
     reviews: [
-      ['Reem T.', 4, 'Short wait and the doctor listened properly.'],
+      ['Riley T.', 4, 'Short wait and the doctor listened properly.'],
     ],
   },
   {
@@ -546,7 +546,7 @@ export const BUSINESSES = [
     description:
       'Pet supplies with a grooming room at the back. Nail trims without an appointment, and a freezer of raw food.',
     address: '45 Kennel Road',
-    phone: '+973 1766 8484',
+    phone: '+1 416 766 8484',
     d: [-0.017, 0.007],
     price: 2,
     rating: 4.5,
@@ -569,7 +569,7 @@ export const BUSINESSES = [
     description:
       'Old-fashioned hardware store with keys cut while you wait, paint mixed to order, and someone who knows which screw you actually need.',
     address: '71 Works Street',
-    phone: '+973 1733 6767',
+    phone: '+1 416 733 6767',
     d: [0.014, 0.011],
     price: 2,
     rating: 4.7,
@@ -592,7 +592,7 @@ export const BUSINESSES = [
     description:
       'Charcoal grill, saffron rice with a proper tahdig, and stews that take a day to make. Family sized platters for the table.',
     address: '8 Spice Court',
-    phone: '+973 1788 1919',
+    phone: '+1 416 788 1919',
     d: [-0.002, -0.017],
     price: 3,
     rating: 4.7,
@@ -617,7 +617,7 @@ export const BUSINESSES = [
     description:
       'Half café, half second-hand bookshop. No music before noon, generous power sockets, and a cat named Dewey.',
     address: '33 Paper Street',
-    phone: '+973 1744 2323',
+    phone: '+1 416 744 2323',
     d: [0.009, -0.016],
     price: 2,
     rating: 4.6,
@@ -640,7 +640,7 @@ export const BUSINESSES = [
     description:
       'Drop off before ten, collect after five. Dry cleaning, alterations and a repair service for anything with a zip.',
     address: '52 Wash Lane',
-    phone: '+973 1755 9494',
+    phone: '+1 416 755 9494',
     d: [0.017, 0.016],
     price: 1,
     rating: 4.2,
@@ -663,7 +663,7 @@ export const BUSINESSES = [
     description:
       'Hot and cold mezze, charcoal grills and bread baked in the corner oven all evening. Large groups welcome with notice.',
     address: '11 Grove Terrace',
-    phone: '+973 1799 5757',
+    phone: '+1 416 799 5757',
     d: [-0.011, -0.01],
     price: 2,
     rating: 4.5,
@@ -686,7 +686,7 @@ export const BUSINESSES = [
     description:
       'Independent opticians with same-week lenses, a free annual eye test, and frames that are not all owned by the same conglomerate.',
     address: '29 Vision Street',
-    phone: '+973 1722 1414',
+    phone: '+1 416 722 1414',
     d: [0.002, 0.013],
     price: 3,
     rating: 4.4,
@@ -709,7 +709,7 @@ export const BUSINESSES = [
     description:
       'Corn tortillas pressed to order, three salsas on every table, and a vegetarian al pastor that converts people.',
     address: '6 Sunset Alley',
-    phone: '+973 1766 2727',
+    phone: '+1 416 766 2727',
     d: [0.011, 0.006],
     price: 1,
     rating: 4.6,
@@ -732,7 +732,7 @@ export const BUSINESSES = [
     description:
       'An all-day brunch spot in a converted greenhouse. Long waits at weekends, no bookings, endlessly photogenic.',
     address: '90 Botanic Road',
-    phone: '+973 1733 3838',
+    phone: '+1 416 733 3838',
     d: [-0.014, 0.017],
     price: 3,
     rating: 4.3,
@@ -756,7 +756,7 @@ export const BUSINESSES = [
     description:
       'The corner shop that has whatever you forgot. Milk, batteries, phone credit, ice, and a surprisingly good cheese counter.',
     address: '4 Northgate',
-    phone: '+973 1711 6262',
+    phone: '+1 416 711 6262',
     d: [0.019, 0.001],
     price: 1,
     rating: 4.1,
@@ -779,7 +779,7 @@ export const BUSINESSES = [
     description:
       'A café for people planning to be somewhere else. Guidebook library, big tables, and a soup that changes daily.',
     address: '38 Compass Court',
-    phone: '+973 1744 4949',
+    phone: '+1 416 744 4949',
     d: [-0.019, -0.006],
     price: 2,
     rating: 4.2,
@@ -802,7 +802,7 @@ export const BUSINESSES = [
     description:
       'Hiking, camping and climbing gear, with boot fitting by someone who has actually walked in them. Rentals available for tents and packs.',
     address: '21 Ridge Way',
-    phone: '+973 1788 5858',
+    phone: '+1 416 788 5858',
     d: [0.007, -0.019],
     price: 3,
     rating: 4.6,
@@ -825,7 +825,7 @@ export const BUSINESSES = [
     description:
       'Manicures, pedicures and facials with appointments running until nine. Walk-ins taken whenever a chair is free.',
     address: '15 Rose Arcade',
-    phone: '+973 1799 7171',
+    phone: '+1 416 799 7171',
     d: [-0.005, 0.019],
     price: 2,
     rating: 4.4,

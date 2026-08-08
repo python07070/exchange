@@ -4,11 +4,13 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 5173,
+    port: 4001,
+    host: '127.0.0.1',
+    allowedHosts: ['shope.hunnipages.com', 'localhost'],
     // The API runs separately; proxying keeps the browser on one origin.
     proxy: {
       '/api': {
-        target: process.env.API_URL || 'http://localhost:4000',
+        target: process.env.API_URL || 'http://127.0.0.1:4000',
         changeOrigin: true,
       },
     },
